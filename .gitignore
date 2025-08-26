@@ -1,0 +1,12 @@
+# Environment variables (machine-specific)
+.env
+
+# Direnv cache
+.direnv/
+
+# Nix build results
+result
+result-*
+
+# macOS
+.DS_Store
