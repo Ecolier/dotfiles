@@ -20,33 +20,42 @@
       sops-nix,
     }:
     let
-      username = builtins.getEnv "NIX_USERNAME";
-      email = builtins.getEnv "NIX_EMAIL";
-      system = builtins.getEnv "NIX_SYSTEM";
-      hostname = builtins.getEnv "NIX_HOSTNAME";
+      # Define system configuration
+      system = "aarch64-darwin";
+      
+      # Function to create a Darwin configuration
+      mkDarwinConfiguration = { username, email, hostname }: 
+        let
+          specialArgs = inputs // {
+            inherit username email hostname;
+          };
+        in
+        nix-darwin.lib.darwinSystem {
+          inherit system specialArgs;
+          modules = [
+            ./modules/apps.nix
+            ./modules/core.nix
+            ./modules/network.nix
+            ./modules/system.nix
+            ./modules/secrets.nix
 
-      specialArgs = inputs // {
-        inherit username email hostname;
-      };
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.users.${username} = import ./home;
+            }
+          ];
+        };
     in
     {
-      darwinConfigurations."${hostname}" = nix-darwin.lib.darwinSystem {
-        inherit system specialArgs;
-        modules = [
-          ./modules/apps.nix
-          ./modules/core.nix
-          ./modules/network.nix
-          ./modules/system.nix
-          ./modules/secrets.nix
-
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = specialArgs;
-            home-manager.users.${username} = import ./home;
-          }
-        ];
+      darwinConfigurations = {
+        "MacBook-Pro-de-Evan" = mkDarwinConfiguration {
+          username = "ecolier";
+          email = "evan.gruere@gmail.com"; 
+          hostname = "MacBook-Pro-de-Evan";
+        };
       };
     };
 }

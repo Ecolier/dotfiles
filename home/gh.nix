@@ -12,15 +12,6 @@
     };
   };
 
-  # Create a wrapper script that sources the GitHub token from sops
-  home.file.".config/gh/config.yml".text = ''
-    git_protocol: ssh
-    editor: vim
-    aliases:
-      co: pr checkout
-      pv: pr view
-  '';
-
   # Create a script to authenticate gh CLI with sops token
   home.file.".local/bin/gh-auth-sops" = {
     text = ''
