@@ -1,7 +1,0 @@
-# SOPS configuration file
-# This file tells sops which key to use for encryption/decryption
-
-creation_rules:
-  - path_regex: secrets\.yaml$
-    age: >-
-      age1hl62g3z5fz8w4qjnkl9w4v5k7l8m9n0p1q2r3s4t5u6v7w8x9y0z1a2b3c4d5e6f

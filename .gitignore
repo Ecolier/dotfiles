@@ -5,7 +5,7 @@
 .direnv/
 
 # Nix build results
-result
+result/
 result-*
 
 # macOS

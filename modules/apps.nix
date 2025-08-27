@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    nixfmt-rfc-style
     colima
     docker
-    nixfmt-rfc-style
     neovim
     nodejs # LTS version for tools (VSCode, etc.)
     git
@@ -20,22 +20,9 @@
       cleanup = "zap";
     };
 
-    brews = [
-      "httpie"
-    ];
-
-    masApps = {
-      # Xcode = 497799835;
-    };
-
     casks = [
       "firefox@developer-edition"
       "visual-studio-code@insiders"
-      "iina"
-      "discord"
-      "stats"
-      "insomnia"
-      "wireshark-app"
     ];
   };
 

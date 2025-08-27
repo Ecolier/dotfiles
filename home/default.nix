@@ -3,7 +3,6 @@
   imports = [
     ./core.nix
     ./direnv.nix
-    ./gh.nix
     ./git.nix
     ./ssh.nix
     ./zsh.nix
