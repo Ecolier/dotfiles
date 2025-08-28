@@ -23,6 +23,7 @@
     casks = [
       "firefox@developer-edition"
       "visual-studio-code@insiders"
+      "kitty"
     ];
   };
 
