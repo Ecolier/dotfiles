@@ -1,7 +1,6 @@
 { ... }:
 {
   imports = [
-    ./kitty
     ./direnv.nix
     ./git.nix
     ./ssh.nix
