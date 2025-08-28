@@ -1,12 +1,14 @@
-{ pkgs, ... }:
+{ ... }:
 {
-  home.packages = with pkgs; [
-    jq
-    direnv
+  imports = [
+    ./kitty
+    ./direnv.nix
+    ./git.nix
+    ./ssh.nix
+    ./zsh.nix
   ];
 
   programs = {
-
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -36,4 +38,6 @@
       enableBashIntegration = true;
     };
   };
+
+  programs.home-manager.enable = true;
 }

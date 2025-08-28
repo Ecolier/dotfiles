@@ -1,11 +1,7 @@
-{ username, ... }:
+{ username, pkgs, ... }:
 {
   imports = [
-    ./core.nix
-    ./direnv.nix
-    ./git.nix
-    ./ssh.nix
-    ./zsh.nix
+    ./programs
   ];
 
   home = {
@@ -14,5 +10,8 @@
     stateVersion = "25.05";
   };
 
-  programs.home-manager.enable = true;
+  home.packages = with pkgs; [
+    jq
+    direnv
+  ];
 }
